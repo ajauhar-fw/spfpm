@@ -100,13 +100,18 @@ class FXfamily(object):
         self.fraction_bits = n_bits         # Bits to right of binary point
         self.integer_bits = n_intbits       # Bits to left of binary point (including sign)
         self.scale = 1 << n_bits
-        self._roundup = 1 << (n_bits - 1)
+        try:
+            self._roundup = 1 << (n_bits - 1)
+        except:
+            self._roundup = 1
 
         try:
             thresh = 1 << (n_bits + n_intbits - 1)
             def validate(scaledval):
-                if scaledval >= thresh or scaledval < -thresh:
-                    raise FXoverflowError
+                if scaledval >= thresh:
+                    scaledval = thresh
+                elif scaledval < -thresh:
+                    scaledval = thresh -1
         except:
             def validate(scaledval): return
         self.validate = validate
