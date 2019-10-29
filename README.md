@@ -27,7 +27,8 @@ The latest version of spfpm can be found
 on [GitHub](https://github.com/rwpenney/spfpm),
 with earlier versions also available
 on [SourceForge](https://sourceforge.net/projects/pyfixedpoint/).
-
+## Installing from Source
+python3 setup.py install --user --prefix=
 
 ## Examples
 
